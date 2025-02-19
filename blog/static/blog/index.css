@@ -1,10 +1,10 @@
-#main-navigadation {
+#main-navigation {
     width: 100%;
     height: 5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 010%;
+    padding: 0 10%;
     position: absolute;
     top: 0;
     left: 0;
@@ -61,7 +61,7 @@
     font-size: 1.5rem;
 }
 
-latest-post {
+#latest-post {
     background-color: white;
     padding: 2rem;
     border-radius: 12px;
