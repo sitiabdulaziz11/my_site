@@ -6,6 +6,7 @@ My Blog
 {% endblock %}
 
 {% block css_file %}
+    <link rel="stylesheet" href="{% static "blog/post.css" %}" />
     <link rel="stylesheet" href="{% static "blog/index.css" %}" />
 {% endblock%}
 
@@ -27,7 +28,7 @@ My Blog
         <h2>My Latest Thoughts</h2>
 
         <ul>
-            <li>
+            {% comment %} <li>
                 <article class="post>">
                   <a href="">
                     <img src=" {% static "blog/images/budge.jpg" %}" alt="Mountain Hiking">
@@ -38,7 +39,8 @@ My Blog
                         </p>
                     </div>
                   </a>
-            </li> 
+            </li>  {% endcomment %}
+            {% include "blog/includes/post.html"%}
         </ul>
     </section>
     

@@ -11,7 +11,7 @@ def starting_page(request):
 def posts(request):
     """For one post
     """
-    pass
+    return render(request, "blog/all_posts.html")
 
 def posts_detail(request):
     """For one post detail.
