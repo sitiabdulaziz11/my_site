@@ -70,7 +70,7 @@
     box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.4);
 }
 
-#latest-post  {
+#latest-post h2 {
     text-align: center;
 }
 
@@ -148,6 +148,18 @@
 } */
 
 /*#latest-post img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    object-position: top;
+    border: 2px solid white;
+    border-radius: 50%;
+    /* background-color: #faf3f3;
+    transform: rotateZ(-5deg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); 
+}*/
+
+/* mine not from instructor #latest-post img {
     width: 5rem;
     height: 5rem;
     object-fit: cover;
