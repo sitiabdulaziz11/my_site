@@ -40,7 +40,9 @@ My Blog
                     </div>
                   </a>
             </li>  {% endcomment %}
-            {% include "blog/includes/post.html"%}
+            {% for post in posts%}
+                {% include "blog/includes/post.html"%}
+            {% endfor %}
         </ul>
     </section>
     
