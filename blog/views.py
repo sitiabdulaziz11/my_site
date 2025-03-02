@@ -6,6 +6,7 @@ from django.http import HttpResponse
 all_posts = [
     {
         "slug": "hike-in-the-mountain",
+        "image": "Terra db sketch.PNG",
         "title": "sms2.PNG",
         "author": "Siti",
         "date": date(2025, 2, 26),
@@ -20,7 +21,8 @@ all_posts = [
                     """
     },
     {
-        "slug": "hike-in-the-mountain",
+        "slug": "the-mountain",
+        "image": "budge.jpg",
         "title": "sms2.PNG",
         "author": "Siti",
         "date": date(2025, 2, 26),
@@ -35,7 +37,8 @@ all_posts = [
                     """
     },
     {
-        "slug": "hike-in-the-mountain",
+        "slug": "hike-in-mountain",
+        "image": "sms2.PNG",
         "title": "sms2.PNG",
         "author": "Siti",
         "date": date(2025, 2, 26),
@@ -57,8 +60,9 @@ def get_date(post):
     """
     # return post.get('date') or
     return post['date']
-    # return post.date
-
+    # return post['all_post']  wrrong
+    # return post["date"] if post["date"] is not None else datetime.min  # ✅ Default date to handle None date value case
+    
 # Create your views here.
 
 def starting_page(request):

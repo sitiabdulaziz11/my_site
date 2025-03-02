@@ -2,13 +2,21 @@
 
 <li>
   <article class="post">
-      <a href="{% url "posts_detail" "the-mountains" %}">
-        <img src="{% static 'blog/images/budge.jpg' %}" alt="Mountain Hiking">
+      {% comment %} <a href="{% url "posts_detail" "the-mountains"%}"> {% endcomment %}
+      <a href="{% url "posts_detail" post.slug %}">
+        {% comment %} <img src="{% static 'blog/images/budge.jpg' %}" alt="Mountain Hiking"> {% endcomment %}
+        <img src="{% static 'blog/images/'|add:post.image %}" alt="{{ post.title }}">
+
         <div class="post__content">
-            <h3>Mountain Hiking</h3>
-            <p>
-                There's nothing Like the views you get when hiking in the Mountain! And I wasn't even prepared for what happend whilst I was enjoying the view!
-            </p>
+            {% comment %} <h3>Mountain Hiking</h3> {% endcomment %}
+            {% comment %} <h3>{{ post['title'] }}</h3> is in python but for template like below {% endcomment %}
+            <h3>{{ post.title }}</h3>
+            {% comment %} <p>
+              There's nothing Like the views you get when hiking in the Mountain! And I wasn't even prepared for what happend whilst I was enjoying the view!
+          </p> {% endcomment %}
+          <p>
+            {{ post.excerpt }}
+        </p>
         </div>
     </a>
   </article>
