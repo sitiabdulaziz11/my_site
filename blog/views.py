@@ -80,10 +80,12 @@ def starting_page(request):
 def posts(request):
     """For one post
     """
-    return render(request, "blog/all_posts.html")
+    # return render(request, "blog/all_posts.html")
+    return render(request, "blog/all_posts.html", {"whole_posts": all_posts })
 
 def posts_detail(request, slug):
     """For one post detail.
     """
-    return render(request, "blog/post-detail.html")
+    identified_post = next(post for post in all_posts if post['slug'] == slug)
+    return render(request, "blog/post-detail.html", {"post": identified_post })
  

@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block title %}
-This Post Title
+{% comment %} This Post Title {% endcomment %}
+{{ post.title }}
 {% endblock %}
 
 {% block css_file %}
@@ -12,18 +13,21 @@ This Post Title
 
 {% block content%}
     <section id="summary">
-        <h2>Post Title</h2>
+        {% comment %} <h2>Post Title</h2> {% endcomment %}
+        <h2>{{ post.title }}</h2>
         <article>
             <img src="{% static "blog/images/sms2.PNG"%}" alt="Post Title" />
-            <address>By Siti</address>
+            {% comment %} <address>By Siti</address> {% endcomment %}
+            <address>By {{ post.author }}</address>
             <div>
-                Last updated on <time>July 10th</time>
+                {% comment %} Last updated on <time>July 10th</time> {% endcomment %}
+                Last updated on <time>{{ post.date|date:"d M Y" }}</time>
             </div>
         </article>
     </section>
 
     <main>
-        <p>
+        {% comment %} <p>
             At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
         </p>
         <p>
@@ -31,6 +35,7 @@ This Post Title
         </p>
         <p>
             At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
-        </p>
+        </p> {% endcomment %}
+        {{ post.content }}
     </main>
 {% endblock %}

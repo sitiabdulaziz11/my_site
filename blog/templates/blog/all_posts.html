@@ -19,12 +19,16 @@ All My posts
                 <article>
                 </article>
             </li>  include just post only like below{% endcomment %}
+             {% for post in whole_posts %}
+                {% include "blog/includes/post.html" %}
+            {% endfor %}
+
+            {% comment %} {% comment %} {% include "blog/includes/post.html" %} {% endcomment %}
+            {% comment %} {% include "blog/includes/post.html" %}
             {% include "blog/includes/post.html" %}
             {% include "blog/includes/post.html" %}
             {% include "blog/includes/post.html" %}
-            {% include "blog/includes/post.html" %}
-            {% include "blog/includes/post.html" %}
-            {% include "blog/includes/post.html" %}
+            {% include "blog/includes/post.html" %}  {% endcomment %}
         </ul>
     </section>
 {% endblock %}
