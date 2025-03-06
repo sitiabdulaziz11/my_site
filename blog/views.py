@@ -7,7 +7,6 @@ all_posts = [
     {
         "slug": "hike-in-the-mountain",
         "image": "Terra db sketch.PNG",
-        "title": "sms2.PNG",
         "author": "Siti",
         "date": date(2025, 2, 26),
         "title": "Mountain Hiking",
@@ -23,9 +22,8 @@ all_posts = [
     {
         "slug": "the-mountain",
         "image": "budge.jpg",
-        "title": "sms2.PNG",
         "author": "Siti",
-        "date": date(2025, 2, 26),
+        "date": date(2025, 4, 26),
         "title": "Mountain Visiting",
         "excerpt": "There's nothing Like the views you get when hiking in the Mountain! And I wasn't even prepared for what happend whilst I was enjoying the view!",
         "content": """
@@ -39,9 +37,8 @@ all_posts = [
     {
         "slug": "hike-in-mountain",
         "image": "sms2.PNG",
-        "title": "sms2.PNG",
         "author": "Siti",
-        "date": date(2025, 2, 26),
+        "date": date(2025, 3, 26),
         "title": "Mountain seeing",
         "excerpt": "There's nothing Like the views you get when hiking in the Mountain! And I wasn't even prepared for what happend whilst I was enjoying the view!",
         "content": """
@@ -85,7 +82,7 @@ def posts(request):
 
 def posts_detail(request, slug):
     """For one post detail.
-    """
+    """ 
     identified_post = next(post for post in all_posts if post['slug'] == slug)
+    # print( f"post {identified_post}")
     return render(request, "blog/post-detail.html", {"post": identified_post })
- 

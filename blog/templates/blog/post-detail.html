@@ -16,7 +16,9 @@
         {% comment %} <h2>Post Title</h2> {% endcomment %}
         <h2>{{ post.title }}</h2>
         <article>
-            <img src="{% static "blog/images/sms2.PNG"%}" alt="Post Title" />
+            {% comment %} <img src="{% static "blog/images/sms2.PNG"%}" alt="Post Title"/> {% endcomment %}
+            {% comment %} <img src="{% static "blog/images/sms2.PNG"%}" alt="Post Title"/> {% endcomment %}
+            <img src="{% static "blog/images/"|add:post.image %}" alt="{{ post.title }}"/>
             {% comment %} <address>By Siti</address> {% endcomment %}
             <address>By {{ post.author }}</address>
             <div>
@@ -36,6 +38,6 @@
         <p>
             At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
         </p> {% endcomment %}
-        {{ post.content }}
+        {{ post.content|linebreaks }}
     </main>
 {% endblock %}
