@@ -19,7 +19,7 @@ all_posts = [
                     At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
                     """
     },
-    {
+      {
         "slug": "the-mountain",
         "image": "budge.jpg",
         "author": "Siti",
