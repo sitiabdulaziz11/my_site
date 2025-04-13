@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.core.validators import MinLengthValidator
+
 # Create your models here.
 
 
@@ -8,7 +10,7 @@ class Author(models.Model):
     """
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
-    email = models.CharField(max_length=300)
+    email = models.EmailField()
     
 
     def __str__(self):
@@ -19,7 +21,7 @@ class Author(models.Model):
 class Tag(models.Model):
     """Tag model
     """
-    caption = models.CharField(max_length=300)
+    caption = models.CharField(max_length=30)
     
     def __str__(self):
         """display format for Author.
@@ -32,19 +34,20 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     excerpt = models.CharField(max_length=300)
     image_name = models.CharField(max_length=100)
-    date = models.DateTimeField(auto_now=True)
-    slug = models.CharField(max_length=100)
-    content = models.CharField(max_length=1000)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    # date = models.DateTimeField(auto_now=True)
+    date = models.DateField(auto_now=True)
+    slug = models.SlugField(unique=True, db_index=True)
+    content = models.TextField(validators=[MinLengthValidator(10)])
+    author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, related_name="posts")
     tag = models.ManyToManyField(Tag)
     
     
-    def post_display(self):
-        """Post contentes.
-        """
-        return f"{self.title} {self.excerpt} {self.date} {self.slug} {self.content} {self.author}" # {self.tag}"
+    # def post_display(self):
+    #     """Post contentes.
+    #     """
+    #     return f"{self.title} {self.excerpt} {self.date} {self.slug} {self.content} {self.author}" # {self.tag}"
     
-    def __str__(self):
-        """ Display format for post.
-        """
-        return self.post_display()
+    # def __str__(self):
+    #     """ Display format for post.
+    #     """
+    #     return self.post_display()

@@ -4,51 +4,51 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 all_posts = [
-    {
-        "slug": "hike-in-the-mountain",
-        "image": "Terra db sketch.PNG",
-        "author": "Siti",
-        "date": date(2025, 2, 26),
-        "title": "Mountain Hiking",
-        "excerpt": "There's nothing Like the views you get when hiking in the Mountain! And I wasn't even prepared for what happend whilst I was enjoying the view!",
-        "content": """
-                    At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
+    # {
+    #     "slug": "hike-in-the-mountain",
+    #     "image": "Terra db sketch.PNG",
+    #     "author": "Siti",
+    #     "date": date(2025, 2, 26),
+    #     "title": "Mountain Hiking",
+    #     "excerpt": "There's nothing Like the views you get when hiking in the Mountain! And I wasn't even prepared for what happend whilst I was enjoying the view!",
+    #     "content": """
+    #                 At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
                     
-                    At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
+    #                 At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
                     
-                    At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
-                    """
-    },
-      {
-        "slug": "the-mountain",
-        "image": "budge.jpg",
-        "author": "Siti",
-        "date": date(2025, 4, 26),
-        "title": "Mountain Visiting",
-        "excerpt": "There's nothing Like the views you get when hiking in the Mountain! And I wasn't even prepared for what happend whilst I was enjoying the view!",
-        "content": """
-                    At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
+    #                 At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
+    #                 """
+    # },
+    #   {
+    #     "slug": "the-mountain",
+    #     "image": "budge.jpg",
+    #     "author": "Siti",
+    #     "date": date(2025, 4, 26),
+    #     "title": "Mountain Visiting",
+    #     "excerpt": "There's nothing Like the views you get when hiking in the Mountain! And I wasn't even prepared for what happend whilst I was enjoying the view!",
+    #     "content": """
+    #                 At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
                     
-                    At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
+    #                 At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
                     
-                    At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
-                    """
-    },
-    {
-        "slug": "hike-in-mountain",
-        "image": "sms2.PNG",
-        "author": "Siti",
-        "date": date(2025, 3, 26),
-        "title": "Mountain seeing",
-        "excerpt": "There's nothing Like the views you get when hiking in the Mountain! And I wasn't even prepared for what happend whilst I was enjoying the view!",
-        "content": """
-                    At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
+    #                 At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
+    #                 """
+    # },
+    # {
+    #     "slug": "hike-in-mountain",
+    #     "image": "sms2.PNG",
+    #     "author": "Siti",
+    #     "date": date(2025, 3, 26),
+    #     "title": "Mountain seeing",
+    #     "excerpt": "There's nothing Like the views you get when hiking in the Mountain! And I wasn't even prepared for what happend whilst I was enjoying the view!",
+    #     "content": """
+    #                 At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
                     
-                    At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
+    #                 At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
                     
-                    At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
-                    """
-    }
+    #                 At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
+    #                 """
+    # }
 ]
 
 def get_date(post):
