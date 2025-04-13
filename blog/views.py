@@ -3,6 +3,8 @@ from datetime import date
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .models import Post
+
 all_posts = [
     # {
     #     "slug": "hike-in-the-mountain",
@@ -65,24 +67,36 @@ def get_date(post):
 def starting_page(request):
     """Renders the home page of the blog.
     """
-    # sorted_posts = posts.sort(key=get_date)
-    sorted_posts = sorted(all_posts, key=get_date)
-    latest_posts = sorted_posts[-3:]
-    return render(request, "blog/index.html", {"posts": latest_posts})  # blog/index.html is b/c template part is looked by django by default. so we don't say templates/blog/index.html
+    latest_posts = Post.objects.all().order_by("-date")[:3]  # Get all posts from the database
+    return render(request, "blog/index.html", {"posts": latest_posts})
+    
+    # below this are codes for above demy date not from database.
+    # # sorted_posts = posts.sort(key=get_date)
+    # sorted_posts = sorted(all_posts, key=get_date)
+    # latest_posts = sorted_posts[-3:]
+    # return render(request, "blog/index.html", {"posts": latest_posts})  # blog/index.html is b/c template part is looked by django by default. so we don't say templates/blog/index.html
 
-    # or like below
-    # posts = BlogPost.objects.all().order_by("-date")[:3]  # Get latest 3 posts
-    #     return render(request, "blog/index.html", {"posts": posts})
+    # # or like below
+    # # posts = BlogPost.objects.all().order_by("-date")[:3]  # Get latest 3 posts
+    # #     return render(request, "blog/index.html", {"posts": posts})
 
 def posts(request):
-    """For one post
+    """For all posts.
     """
-    # return render(request, "blog/all_posts.html")
-    return render(request, "blog/all_posts.html", {"whole_posts": all_posts })
+    all_post = Post.objects.all()  # Get all posts from the database
+    return render(request, "blog/all_posts.html", {"whole_posts": all_post })
+    
+    # bellow is for above demy data
+    # # return render(request, "blog/all_posts.html")
+    # return render(request, "blog/all_posts.html", {"whole_posts": all_posts })
 
 def posts_detail(request, slug):
     """For one post detail.
-    """ 
-    identified_post = next(post for post in all_posts if post['slug'] == slug)
-    # print( f"post {identified_post}")
-    return render(request, "blog/post-detail.html", {"post": identified_post })
+    """
+    post_detail = Post.objects.get(slug=slug)  # Get post by slug from the database
+    return render(request, "blog/post-detail.html", {"post": post_detail})
+    
+    # below is for the above demy data
+    # identified_post = next(post for post in all_posts if post['slug'] == slug)
+    # # print( f"post {identified_post}")
+    # return render(request, "blog/post-detail.html", {"post": identified_post })
