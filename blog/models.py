@@ -26,7 +26,6 @@ class Tag(models.Model):
         """
         return f"{self.caption}"
 
-
 class Post(models.Model):
     """Post models
     """
