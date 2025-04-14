@@ -1,11 +1,11 @@
-from datetime import date
+# from datetime import date
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
 from .models import Post
 
-all_posts = [
+# all_posts = [
     # {
     #     "slug": "hike-in-the-mountain",
     #     "image": "Terra db sketch.PNG",
@@ -51,16 +51,16 @@ all_posts = [
     #                 At the bottom right of VS Code, ensure that the language mode is HTML or another supported language. If it shows something else like Plain Text, click on it and change it to HTML
     #                 """
     # }
-]
+# ]
 
-def get_date(post):
-    """
-    helper function for getting the sorted date.
-    """
-    # return post.get('date') or
-    return post['date']
-    # return post['all_post']  wrrong
-    # return post["date"] if post["date"] is not None else datetime.min  # ✅ Default date to handle None date value case
+# def get_date(post):
+#     """
+#     helper function for getting the sorted date.
+#     """
+#     # return post.get('date') or
+#     return post['date']
+#     # return post['all_post']  wrrong
+#     # return post["date"] if post["date"] is not None else datetime.min  # ✅ Default date to handle None date value case
     
 # Create your views here.
 
@@ -83,18 +83,19 @@ def starting_page(request):
 def posts(request):
     """For all posts.
     """
-    all_post = Post.objects.all()  # Get all posts from the database
+    all_post = Post.objects.all().order_by("-date")  # Get all posts from the database
     return render(request, "blog/all_posts.html", {"whole_posts": all_post })
     
     # bellow is for above demy data
     # # return render(request, "blog/all_posts.html")
     # return render(request, "blog/all_posts.html", {"whole_posts": all_posts })
 
-def posts_detail(request, slug):
+def posts_detail(request, slug1):
     """For one post detail.
     """
-    post_detail = Post.objects.get(slug=slug)  # Get post by slug from the database
-    return render(request, "blog/post-detail.html", {"post": post_detail})
+    # identified_post = Post.objects.get(slug=slug1)  # Get post by slug from the database
+    identified_post = get_object_or_404(Post, slug=slug1)
+    return render(request, "blog/post-detail.html", {"post": identified_post})
     
     # below is for the above demy data
     # identified_post = next(post for post in all_posts if post['slug'] == slug)
