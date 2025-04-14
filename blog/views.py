@@ -95,7 +95,10 @@ def posts_detail(request, slug1):
     """
     # identified_post = Post.objects.get(slug=slug1)  # Get post by slug from the database
     identified_post = get_object_or_404(Post, slug=slug1)
-    return render(request, "blog/post-detail.html", {"post": identified_post})
+    return render(request, "blog/post-detail.html",
+                  {"post": identified_post,
+                   "tags": identified_post.tag.all()  # Get all tags related to the post
+                   })
     
     # below is for the above demy data
     # identified_post = next(post for post in all_posts if post['slug'] == slug)
