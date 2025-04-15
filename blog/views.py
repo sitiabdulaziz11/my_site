@@ -95,6 +95,12 @@ def posts_detail(request, slug1):
     """
     # identified_post = Post.objects.get(slug=slug1)  # Get post by slug from the database
     identified_post = get_object_or_404(Post, slug=slug1)
+    
+    # tags = identified_post.tag.all()  # for debugging
+    # print(tags)  # This query tags only the one related to the specific post.
+    
+    # all_tags = Tag.objects.all()  # Get all tags in the database, if we want to show all tags not only the one related to the post
+    
     return render(request, "blog/post-detail.html",
                   {"post": identified_post,
                    "tags": identified_post.tag.all()  # Get all tags related to the post
