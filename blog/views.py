@@ -2,6 +2,7 @@
 
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.views.generic import ListView, DetailView
 
 from .models import Post
 
@@ -64,47 +65,88 @@ from .models import Post
     
 # Create your views here.
 
-def starting_page(request):
+class StartingPageView(ListView):
     """Renders the home page of the blog.
     """
-    latest_posts = Post.objects.all().order_by("-date")[:3]  # Get all posts from the database
-    return render(request, "blog/index.html", {"posts": latest_posts})
+    template_name = "blog/index.html"
+    model = Post
+    ordering = ["-date"]  #  we can also others ordering too.
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        """controls how data get quered.
+        """
+        queryset = super().get_queryset()  # all querys
+        data = queryset[:3]  # only the last 3 querys
+        return data
     
-    # below this are codes for above demy date not from database.
-    # # sorted_posts = posts.sort(key=get_date)
-    # sorted_posts = sorted(all_posts, key=get_date)
-    # latest_posts = sorted_posts[-3:]
-    # return render(request, "blog/index.html", {"posts": latest_posts})  # blog/index.html is b/c template part is looked by django by default. so we don't say templates/blog/index.html
 
-    # # or like below
-    # # posts = BlogPost.objects.all().order_by("-date")[:3]  # Get latest 3 posts
-    # #     return render(request, "blog/index.html", {"posts": posts})
+# def starting_page(request):
+#     """Renders the home page of the blog.
+#     """
+#     latest_posts = Post.objects.all().order_by("-date")[:3]  # Get all posts from the database
+#     return render(request, "blog/index.html", {"posts": latest_posts})
+    
+#     # below this are codes for above demy date not from database.
+#     # # sorted_posts = posts.sort(key=get_date)
+#     # sorted_posts = sorted(all_posts, key=get_date)
+#     # latest_posts = sorted_posts[-3:]
+#     # return render(request, "blog/index.html", {"posts": latest_posts})  # blog/index.html is b/c template part is looked by django by default. so we don't say templates/blog/index.html
 
-def posts(request):
-    """For all posts.
+#     # # or like below
+#     # # posts = BlogPost.objects.all().order_by("-date")[:3]  # Get latest 3 posts
+#     # #     return render(request, "blog/index.html", {"posts": posts})
+
+class PostsView(ListView):
+    """To display all posts
     """
-    all_post = Post.objects.all().order_by("-date")  # Get all posts from the database
-    return render(request, "blog/all_posts.html", {"whole_posts": all_post })
-    
-    # bellow is for above demy data
-    # # return render(request, "blog/all_posts.html")
-    # return render(request, "blog/all_posts.html", {"whole_posts": all_posts })
+    template_name = "blog/all_posts.html"
+    model = Post
+    ordering = ["-date"]
+    context_object_name = "whole_posts"
 
-def posts_detail(request, slug1):
+
+# def posts(request):
+#     """For all posts.
+#     """
+#     all_post = Post.objects.all().order_by("-date")  # Get all posts from the database
+#     return render(request, "blog/all_posts.html", {"whole_posts": all_post })
+    
+#     # bellow is for above demy data
+#     # # return render(request, "blog/all_posts.html")
+#     # return render(request, "blog/all_posts.html", {"whole_posts": all_posts })
+
+class PostDetail(DetailView):
     """For one post detail.
     """
-    # identified_post = Post.objects.get(slug=slug1)  # Get post by slug from the database
-    identified_post = get_object_or_404(Post, slug=slug1)
+    template_name = "blog/post-detail.html"
+    model = Post
+    # context_object_name = "tags", "post"
+
+    def get_context_data(self, **kwargs):
+        """Overwrite or update get_context to add tags field.
+        """
+        context = super().get_context_data(**kwargs)
+        context["tags"] = self.object.tag.all()
+        return context
     
-    # tags = identified_post.tag.all()  # for debugging
-    # print(tags)  # This query tags only the one related to the specific post.
+
+
+# def posts_detail(request, slug1):
+#     """For one post detail.
+#     """
+#     # identified_post = Post.objects.get(slug=slug1)  # Get post by slug from the database
+#     identified_post = get_object_or_404(Post, slug=slug1)
     
-    # all_tags = Tag.objects.all()  # Get all tags in the database, if we want to show all tags not only the one related to the post
+#     # tags = identified_post.tag.all()  # for debugging
+#     # print(tags)  # This query tags only the one related to the specific post.
     
-    return render(request, "blog/post-detail.html",
-                  {"post": identified_post,
-                   "tags": identified_post.tag.all()  # Get all tags related to the post
-                   })
+#     # all_tags = Tag.objects.all()  # Get all tags in the database, if we want to show all tags not only the one related to the post
+    
+    # return render(request, "blog/post-detail.html",
+    #               {"post": identified_post,
+    #                "tags": identified_post.tag.all()  # Get all tags related to the post
+    #                })
     
     # below is for the above demy data
     # identified_post = next(post for post in all_posts if post['slug'] == slug)
