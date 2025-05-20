@@ -1,10 +1,13 @@
 # from datetime import date
 
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import ListView, DetailView
+from django.views import View
 
 from .models import Post
+from .forms import CommentForm
 
 # all_posts = [
     # {
@@ -116,21 +119,51 @@ class PostsView(ListView):
 #     # # return render(request, "blog/all_posts.html")
 #     # return render(request, "blog/all_posts.html", {"whole_posts": all_posts })
 
-class PostDetail(DetailView):
+# class PostDetail(DetailView):
+class PostDetail(View):
     """For one post detail.
     """
-    template_name = "blog/post-detail.html"
-    model = Post
-    # context_object_name = "tags", "post"
+    # template_name = "blog/post-detail.html"
+    # model = Post
 
-    def get_context_data(self, **kwargs):
-        """Overwrite or update get_context to add tags field.
+    # def get_context_data(self, **kwargs):
+    #     """Overwrite or update get_context to add tags field.
+    #     """
+    #     context = super().get_context_data(**kwargs)
+    #     context["tags"] = self.object.tag.all()
+    #     context["comment_form"] = CommentForm()
+    #     return context
+
+    def get(self, request, slug):
+        """To handle get request
         """
-        context = super().get_context_data(**kwargs)
-        context["tags"] = self.object.tag.all()
-        return context
+        post = Post.objects.get(slug=slug)
+        context = {
+            "post": post,
+            "post_tags": post.tag.all(),
+            "comment_form": CommentForm()
+        }
+        return render(request, "blog/post-detail.html", context)
     
+    def post(self,request, slug):
+        """To handle post request.
+        """
+        comment_form = CommentForm(request.POST)
+        post = Post.objects.get(slug=slug)
 
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)  # save not hit the db, instade create the new model instance.
+            comment.post = post
+            comment.save()
+
+            return HttpResponseRedirect(reverse("posts_detail", args=[slug]))
+        
+        context = {
+            "post": post,
+            "post_tags": post.tag.all(),
+            "comment_form": comment_form
+        }
+        return render(request, "blog/post-detail.html", context)
 
 # def posts_detail(request, slug1):
 #     """For one post detail.

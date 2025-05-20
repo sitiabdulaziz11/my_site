@@ -12,6 +12,14 @@
 {% endblock%}
 
 {% block content%}
+
+{% if comment_form.errors %}
+        <div id="alert">
+            <h2>Saving the comment failed!</h2>
+            <p>Please check the comment form below the post and fix your erros.</p>
+        </div>
+    {% endif %}
+
     <section id="summary">
         {% comment %} <h2>Post Title</h2> {% endcomment %}
         <h2>{{ post.title }}</h2>
@@ -46,4 +54,20 @@
         </p> {% endcomment %}
         {{ post.content|linebreaks }}
     </main>
+    <section id="comment_form">
+        <h2>Your Comment</h2>
+        {% comment %} action is used to set url w/c request should be sent when the form is submitted.{% endcomment %}
+        <form action="{% url "posts_detail" post.slug %}" method="POST">  
+            {%  csrf_token %}
+            {% for form_field in comment_form %}
+                <div class="form-control {% if form_field.errors %}invalid{% endif %}">
+                    {{ form_field.label_tag }}
+                    {{ form_field }}
+                    {{ form_field.errors }}
+                </div>
+            {% endfor %}
+            {% comment %} {{ comment_form }} {% endcomment %}
+            <button>Save Comment</button>
+        </form>
+    </section>
 {% endblock %}
