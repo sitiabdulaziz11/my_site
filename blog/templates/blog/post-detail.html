@@ -17,6 +17,7 @@
         <div id="alert">
             <h2>Saving the comment failed!</h2>
             <p>Please check the comment form below the post and fix your erros.</p>
+            <a href="#comment_form">Fix!</a> {% comment %} this is to link two elements or two field in the same page.  {% endcomment %}
         </div>
     {% endif %}
 
@@ -54,6 +55,19 @@
         </p> {% endcomment %}
         {{ post.content|linebreaks }}
     </main>
+
+    <section id="comments">
+        <ul>
+          {% for comment in comments %}
+            <li>
+                <h2>{{ comment.user_name }}</h2>
+                {% comment %} <p>{{ comment.text|linebreaks }}</p> {% endcomment %}
+                <p>{{ comment.text }} {{ comment.date }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+
     <section id="comment_form">
         <h2>Your Comment</h2>
         {% comment %} action is used to set url w/c request should be sent when the form is submitted.{% endcomment %}

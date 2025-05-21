@@ -42,6 +42,10 @@ class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, related_name="posts")
     tag = models.ManyToManyField(Tag)
     
+    def __str__(self):
+        """To display posts in a correct format.
+        """
+        return self.title
     
     # def post_display(self):
     #     """Post contentes.
@@ -61,3 +65,5 @@ class Comment(models.Model):
     text = models.TextField(max_length=400)
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name="comments")
+    date = models.DateField(auto_now=True)
+
