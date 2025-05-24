@@ -25,9 +25,16 @@
         {% comment %} <h2>Post Title</h2> {% endcomment %}
         <h2>{{ post.title }}</h2>
         <div>
-            {% for atag in tags %}
+            {% for atag in post_tags %}
                 <span class="tag">{{ atag.caption }}</span>
             {% endfor %}
+        </div>
+        <div id="read-later">
+            <form action=" {% url "read-later" %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value="{{ post.id }}" name="post_id">
+                <button>Read Later</button>
+            </form>
         </div>
         <article>
             {% comment %} <img src="{% static "blog/images/sms2.PNG"%}" alt="Post Title"/> {% endcomment %}

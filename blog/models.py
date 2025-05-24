@@ -45,7 +45,7 @@ class Post(models.Model):
     def __str__(self):
         """To display posts in a correct format.
         """
-        return self.title
+        return f"{self.title}, {self.date}"
     
     # def post_display(self):
     #     """Post contentes.
